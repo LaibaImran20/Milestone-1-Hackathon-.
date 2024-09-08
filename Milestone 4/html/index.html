@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Editor</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        input, textarea { width: 100%; margin-bottom: 10px; }
+        button { background-color: #007bff; color: white; padding: 10px; border: none; cursor: pointer; }
+        .editable { border: 1px solid #007bff; padding: 5px; cursor: pointer; }
+        .edit-mode { display: none; }
+        .editable input { width: 100%; }
+    </style>
+</head>
+<body>
+    <form id="resumeForm">
+        <input type="text" id="name" placeholder="Name">
+        <input type="email" id="email" placeholder="Email">
+        <textarea id="education" placeholder="Education"></textarea>
+        <textarea id="work" placeholder="Work Experience"></textarea>
+        <input type="text" id="skills" placeholder="Skills (comma-separated)">
+        <button type="button" id="generateButton">Generate Resume</button>
+    </form>
+    <div id="resume" style="display:none;">
+        <h2>Resume</h2>
+        <p id="resume-name" class="editable">Click to edit</p>
+        <p id="resume-email" class="editable">Click to edit</p>
+        <p id="resume-education" class="editable">Click to edit</p>
+        <p id="resume-work" class="editable">Click to edit</p>
+        <p id="resume-skills" class="editable">Click to edit</p>
+    </div>
+    <script>
+        document.getElementById('generateButton').addEventListener('click', () => {
+            document.getElementById('resume-name').textContent = `Name: ${document.getElementById('name').value}`;
+            document.getElementById('resume-email').textContent = `Email: ${document.getElementById('email').value}`;
+            document.getElementById('resume-education').textContent = document.getElementById('education').value;
+            document.getElementById('resume-work').textContent = document.getElementById('work').value;
+            document.getElementById('resume-skills').textContent = document.getElementById('skills').value;
+            document.getElementById('resume').style.display = 'block';
+        });
+
+        document.querySelectorAll('.editable').forEach(p => {
+            p.addEventListener('click', () => {
+                if (!p.classList.contains('edit-mode')) {
+                    p.classList.add('edit-mode');
+                    const input = document.createElement('input');
+                    input.value = p.textContent.replace(/^(Name: |Email: |)/, '');
+                    p.innerHTML = '';
+                    p.appendChild(input);
+                    input.focus();
+                    input.addEventListener('blur', () => {
+                        p.classList.remove('edit-mode');
+                        p.textContent = input.value;
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

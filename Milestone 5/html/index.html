@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        input, textarea { width: 100%; margin-bottom: 10px; }
+        button { background-color: #007bff; color: white; padding: 10px; border: none; cursor: pointer; }
+        #resume { display: none; }
+        #shareLink { display: none; }
+    </style>
+</head>
+<body>
+    <form id="resumeForm">
+        <input type="text" id="name" placeholder="Name">
+        <input type="email" id="email" placeholder="Email">
+        <textarea id="education" placeholder="Education"></textarea>
+        <textarea id="work" placeholder="Work Experience"></textarea>
+        <input type="text" id="skills" placeholder="Skills (comma-separated)">
+        <button type="button" id="generateButton">Generate Resume</button>
+    </form>
+    <div id="resume">
+        <h2>Resume</h2>
+        <p id="resume-name"></p>
+        <p id="resume-email"></p>
+        <p id="resume-education"></p>
+        <p id="resume-work"></p>
+        <p id="resume-skills"></p>
+        <button id="downloadButton">Download PDF</button>
+        <button id="shareButton">Share Resume</button>
+        <p id="shareLink">Share your resume: <a id="resumeLink" target="_blank"></a></p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.6.0/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
